@@ -6,13 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.JavascriptExecutor; // JavascriptExecutor'ı ekledik
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -23,8 +19,7 @@ public class MigrosCucumberSteps {
     WebDriver driver;
     MigrosPage migrosPage = new MigrosPage();
     Random random = new Random();
-    JavascriptExecutor jse; // Burada sadece değişkeni tanımladık, atama işlemi constructor'da yapılacak
-
+    JavascriptExecutor jse;
     public MigrosCucumberSteps() {
         this.driver = Driver.getDriver(); // Driver nesnesini tanımladık
         this.jse = (JavascriptExecutor) driver; // JavascriptExecutor'ı tanımladık
@@ -74,53 +69,51 @@ public class MigrosCucumberSteps {
         ReusableMethods.bekle(3);
     }
 
-    @When("Temel gidadan alt kategori random olarak secilir")
-    public void temel_gidadan_alt_kategori_random_olarak_secilir() {
-        int randomIndex = ThreadLocalRandom.current().nextInt(migrosPage.urunlerElementiList.size());
-        WebElement selectedProduct = migrosPage.urunlerElementiList.get(randomIndex);
-        // Seçilen ürünün adını konsola yazdırma
-        System.out.println("Seçilen ürün: " + selectedProduct.getText());
-    }
-
-    @And("Kullanici sepete gider tutarin belirlenen tutardan yuksek olmadigini teyit eder")
+      @And("Kullanici sepete rastgele urun ekler ve tutarin belirlenen tutardan yuksek olmadigini teyit eder")
     public void kullanici_sepete_gider_tutarin_belirlenen_tutardan_yuksek_olmadigini_teyit_eder() {
         double butceLimiti = 1000.0;
-        double toplamFiyat = 1.0;
+        double toplamFiyat = 0.0;
+        Random random = new Random();
         ReusableMethods.bekle(2);
-        for (WebElement urun : migrosPage.urunlerElementiList) {
-            String urunAdi = urun.getText();
+
+        // Tüm ürünlerin fiyatlarını içerecek bir liste oluştur
+        List<WebElement> urunlerListesi = migrosPage.urunlerElementiList;
+
+        while (toplamFiyat < butceLimiti) {
+            // Rastgele bir ürün seç
+            int randomIndex = random.nextInt(urunlerListesi.size());
+            WebElement randomUrun = urunlerListesi.get(randomIndex);
+
+            String urunAdi = randomUrun.getText();
             try {
-                // urun fiyatini al
-                WebElement urunFiyatiElement = urun.findElement(By.xpath("//span[@id='new-amount']"));
+                // Ürün fiyatını al
+                WebElement urunFiyatiElement = randomUrun.findElement(By.xpath(".//span[@id='new-amount']"));
                 String urunFiyatiString = urunFiyatiElement.getText()
                         .replaceAll("[^0-9.,]+", "")
                         .replace(",", ".")
                         .trim();
                 double urunFiyati = Double.parseDouble(urunFiyatiString);
 
-                // Toplam fiyati guncelle
-                double guncelToplamFiyat = toplamFiyat + urunFiyati;
+                // Toplam fiyatı güncelle
+                toplamFiyat += urunFiyati;
 
-                // Butceyi asacak mi kontrol et
-                if (guncelToplamFiyat < butceLimiti) {
-                    // urunu sepete ekle
-                    WebElement product = urun.findElement(By.xpath(".//*[@class='ng-fa-icon add-to-cart-button ng-star-inserted']"));
+                // Butçeyi aşacak mı kontrol et
+                if (toplamFiyat < butceLimiti) {
+                    // Ürünü sepete ekle
+                    WebElement product = randomUrun.findElement(By.xpath(".//*[@class='ng-fa-icon add-to-cart-button ng-star-inserted']"));
                     ReusableMethods.bekle(2);
                     jse.executeScript("arguments[0].click();", product);
-                    System.out.println("Secilen urun: " + urunAdi);
+                    System.out.println("Seçilen ürün: " + urunAdi);
 
-                    // Toplam fiyati guncelle
-                    toplamFiyat = guncelToplamFiyat;
-
-                    System.out.println("alisveris sepeti tutari: "+guncelToplamFiyat +" TL");
+                    System.out.println("Alışveriş sepeti tutarı: " + toplamFiyat + " TL");
                     System.out.println("-----------------------------------------------------");
                 } else {
-                    System.out.println("alisveris sepeti asim yapildigindaki tutar: "+guncelToplamFiyat +" TL");
-                    System.out.println("Butce limiti asildi! Alısveris durduruldu.");
+                    System.out.println("Alışveriş sepeti aşıldığında tutar: " + toplamFiyat + " TL");
+                    System.out.println("Bütçe limiti aşıldı! Alışveriş durduruldu.");
                     break;
                 }
             } catch (NoSuchElementException e) {
-                System.out.println("Hata: Element bulunamadi");
+                System.out.println("Hata: Element bulunamadı");
                 e.printStackTrace();
             }
             ReusableMethods.bekle(2);
@@ -129,3 +122,4 @@ public class MigrosCucumberSteps {
     }
 
 }
+

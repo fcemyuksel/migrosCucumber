@@ -9,5 +9,4 @@ Feature: US01 Migros Testi
     Then Kullanici Migros Hemen sekmesini secer.
     Then Adres belirleme islemi gerceklestirilir
     When Kullanici kategoriler kismindan Et Baliki secer.
-    When Temel gidadan alt kategori random olarak secilir
-    And Kullanici sepete gider tutarin belirlenen tutardan yuksek olmadigini teyit eder
+    And  Kullanici sepete rastgele urun ekler ve tutarin belirlenen tutardan yuksek olmadigini teyit eder
