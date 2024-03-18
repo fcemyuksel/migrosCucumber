@@ -1,0 +1,30 @@
+2024-03-18 10:40:25 INFO  MigrosCucumberSteps:34 - Test baslatildi.
+2024-03-18 10:40:28 INFO  MigrosCucumberSteps:40 - Migros Url'ine gidildi.
+2024-03-18 10:40:33 INFO  MigrosCucumberSteps:47 - popup ve cerezler kapatildi
+2024-03-18 10:40:36 INFO  MigrosCucumberSteps:54 - kullanicinin dogru sayfada oldugu teyit edildi
+2024-03-18 10:40:39 INFO  MigrosCucumberSteps:61 - migros hemen sekmesine gidildi
+2024-03-18 10:40:53 INFO  MigrosCucumberSteps:75 - adres belirleme islemleri gerceklestirildi
+2024-03-18 11:03:45 INFO  MigrosCucumberSteps:34 - Test baslatildi.
+2024-03-18 11:03:48 INFO  MigrosCucumberSteps:40 - Migros Url'ine gidildi.
+2024-03-18 11:03:53 INFO  MigrosCucumberSteps:47 - popup ve cerezler kapatildi
+2024-03-18 11:03:56 INFO  MigrosCucumberSteps:54 - kullanicinin dogru sayfada oldugu teyit edildi
+2024-03-18 11:04:00 INFO  MigrosCucumberSteps:61 - migros hemen sekmesine gidildi
+2024-03-18 11:04:14 INFO  MigrosCucumberSteps:75 - adres belirleme islemleri gerceklestirildi
+2024-03-18 11:04:17 INFO  MigrosCucumberSteps:84 - kategorilerden et-balik-tavuk secildi
+2024-03-18 11:04:24 INFO  MigrosCucumberSteps:135 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:04:28 INFO  MigrosCucumberSteps:135 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:04:32 INFO  MigrosCucumberSteps:135 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:06:33 INFO  MigrosCucumberSteps:34 - Test baslatildi.
+2024-03-18 11:06:37 INFO  MigrosCucumberSteps:40 - Migros Url'ine gidildi.
+2024-03-18 11:06:41 INFO  MigrosCucumberSteps:47 - popup ve cerezler kapatildi
+2024-03-18 11:06:44 INFO  MigrosCucumberSteps:54 - kullanicinin dogru sayfada oldugu teyit edildi
+2024-03-18 11:06:48 INFO  MigrosCucumberSteps:61 - migros hemen sekmesine gidildi
+2024-03-18 11:07:01 INFO  MigrosCucumberSteps:75 - adres belirleme islemleri gerceklestirildi
+2024-03-18 11:07:04 INFO  MigrosCucumberSteps:84 - kategorilerden et-balik-tavuk secildi
+2024-03-18 11:07:10 INFO  MigrosCucumberSteps:136 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:07:14 INFO  MigrosCucumberSteps:136 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:07:18 INFO  MigrosCucumberSteps:136 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:07:23 INFO  MigrosCucumberSteps:136 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:07:38 INFO  MigrosCucumberSteps:133 - Aranan urun bulunamadi, test sonlandirildi
+2024-03-18 11:07:40 INFO  MigrosCucumberSteps:136 - ürünlerden rastgele urunler verilen limtler kadar secildi
+2024-03-18 11:07:40 INFO  MigrosCucumberSteps:139 - test bitirildi

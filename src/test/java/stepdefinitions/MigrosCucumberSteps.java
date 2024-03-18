@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import java.util.*;
 import org.openqa.selenium.*;
@@ -19,39 +20,51 @@ public class MigrosCucumberSteps {
     WebDriver driver;
     MigrosPage migrosPage = new MigrosPage();
     Random random = new Random();
+    final static Logger logger = Logger.getLogger(MigrosCucumberSteps.class);
+    public static void clickElement(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
+
+        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid blue;');", element);
+        element.click();
+    }
     JavascriptExecutor jse;
     public MigrosCucumberSteps() {
         this.driver = Driver.getDriver(); // Driver nesnesini tanımladık
         this.jse = (JavascriptExecutor) driver; // JavascriptExecutor'ı tanımladık
+        logger.info("Test baslatildi.");
     }
 
     @Given("Kullanici https:\\/\\/www.migros.com.tr\\/ sitesine gider")
     public void kullanici_https_www_migros_com_tr_sitesine_gider() {
         driver.get(ConfigReader.getProperty("migrosUrl"));
+        logger.info("Migros Url'ine gidildi.");
     }
 
     @When("Kullanici pop-up ve cerezleri kapatir.")
     public void kullanici_pop_up_ve_cerezleri_kapatir() {
         ReusableMethods.bekle(3);
-        migrosPage.cerezReddetElementi.click();
+        clickElement(migrosPage.cerezReddetElementi);
+        logger.info("popup ve cerezler kapatildi");
     }
 
     @When("Kullanici sitenin dogru oldugunu kontrol eder.")
     public void kullanici_sitenin_dogru_oldugunu_kontrol_eder() {
         Assert.assertTrue(migrosPage.uyeOlElementi.isDisplayed());
         ReusableMethods.bekle(3);
+        logger.info("kullanicinin dogru sayfada oldugu teyit edildi");
     }
 
     @When("Kullanici Migros Hemen sekmesini secer.")
     public void kullanici_migros_hemen_sekmesini_secer() {
-        migrosPage.migrosHemenElementi.click();
+        clickElement(migrosPage.migrosHemenElementi);
         ReusableMethods.bekle(3);
+        logger.info("migros hemen sekmesine gidildi");
     }
 
     @Then("Adres belirleme islemi gerceklestirilir")
     public void Adres_belirleme_islemi_gerceklestirilir() {
-        migrosPage.adresTanimlamaElementi.click();
-        migrosPage.adresimeGelsinElementi.click();
+        clickElement(migrosPage.adresTanimlamaElementi);
+        clickElement(migrosPage.adresimeGelsinElementi);
         ReusableMethods.bekle(3);
         migrosPage.mevcutKonumuKullan.click();
         ReusableMethods.bekle(3);
@@ -59,14 +72,16 @@ public class MigrosCucumberSteps {
         ReusableMethods.bekle(3);
         migrosPage.adresimDogruButonu.click();
         ReusableMethods.bekle(3);
+        logger.info("adres belirleme islemleri gerceklestirildi");
     }
 
     @When("Kullanici kategoriler kismindan Et Baliki secer.")
     public void kullanici_kategoriler_kismindan_temel_gida_yi_secer() {
-        jse.executeScript("arguments[0].scrollIntoView();", migrosPage.etBalikElementi);
-        ReusableMethods.bekle(3);
+        //jse.executeScript("arguments[0].scrollIntoView();", migrosPage.etBalikElementi);
+       // ReusableMethods.bekle(3);
         migrosPage.etBalikElementi.click();
         ReusableMethods.bekle(3);
+        logger.info("kategorilerden et-balik-tavuk secildi");
     }
 
       @And("Kullanici sepete rastgele urun ekler ve tutarin belirlenen tutardan yuksek olmadigini teyit eder")
@@ -115,9 +130,13 @@ public class MigrosCucumberSteps {
             } catch (NoSuchElementException e) {
                 System.out.println("Hata: Element bulunamadı");
                 e.printStackTrace();
+                logger.info("Aranan urun bulunamadi");
             }
             ReusableMethods.bekle(2);
+            logger.info("ürünlerden rastgele urunler verilen limtler kadar secildi");
         }
+
+        logger.info("test bitirildi");
         Driver.closeDriver();
     }
 
