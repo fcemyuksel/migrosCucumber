@@ -1,4 +1,4 @@
-# com.migros alisveris testi CUCUMBER
+# migros alisveris testi CUCUMBER
 Migros sayfasinda alisveris yapar </br>
 
 Kullanici https://www.migros.com.tr/ sitesine gider</br>
