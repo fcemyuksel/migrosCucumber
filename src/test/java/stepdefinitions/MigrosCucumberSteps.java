@@ -31,7 +31,7 @@ public class MigrosCucumberSteps {
     public MigrosCucumberSteps() {
         this.driver = Driver.getDriver(); // Driver nesnesini tanımladık
         this.jse = (JavascriptExecutor) driver; // JavascriptExecutor'ı tanımladık
-        logger.info("Test baslatildi.");
+        logger.info("Migros alisveris testi baslatildi.");
     }
 
     @Given("Kullanici https:\\/\\/www.migros.com.tr\\/ sitesine gider")
